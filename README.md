@@ -6,3 +6,7 @@ A [LaTeX](https://www.latex-project.org/) template for appeals to official notif
 Created for and suggested to be used with [FragDenStaat](https://fragdenstaat.de/).
 
 Currently only translated in German.
+
+## Building
+
+We recommend an up-to-date Tex distribution, such as TexLive 2020.
