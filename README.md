@@ -1,4 +1,4 @@
-**[German translation]()**
+**[German translation](./README-de.md)**
 
 # ifg-letter-appeal
 
