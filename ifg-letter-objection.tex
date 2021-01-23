@@ -1,0 +1,402 @@
+% !TeX program = lualatex
+% !BIB TS-program = biber
+% !TeX encoding = UTF-8
+% !TeX spellcheck = de_DE
+
+\documentclass[
+paper=a4,
+parskip=full,
+twoside
+]{scrartcl}
+\usepackage[
+%DIN5008A, % load up-to-date DIN if it exists (TODO: or DIN5008B???)
+backaddress=false,
+firstfoot=true,
+enlargefirstpage=true,
+% fromalign=false,
+]{scrletter}
+\parskip3mm
+\parindent0mm % if you want to have no lineskip
+
+% encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% deutsch
+\usepackage[
+english,
+ngerman,
+% shorthands=off
+]{babel}
+\usepackage[ngerman]{isodate}\usepackage[autostyle, german=quotes]{csquotes} % deutsche Anführungszeichen mit \enquote
+
+% better page numbers
+% https://tex.stackexchange.com/a/578140/98645
+\renewcommand*\pagemark{%
+	\usekomafont{pagenumber}{-~\thepage~von~\letterlastpage~-}%
+}
+\let\letterpagemark\pagemark
+% https://tex.stackexchange.com/q/578016/98645
+%\usepackage{scrlayer-scrpage}
+%\cfoot{- \thepage\ von \letterlastpage\ -}
+% also show page number on first page
+% https://tex.stackexchange.com/a/578050/98645
+\newcommand{\originalopening}{}
+\let\originalopening\opening
+\renewcommand{\opening}[1]{\originalopening{#1}\thispagestyle{plain}}
+\KOMAoptions{firstfoot=false}% disable first footer
+
+% Set Page layout:
+%\usepackage{changepage}
+%\changepage{text height}{text width}{even-side margin}
+%{odd-side margin}{column sep.}
+%{topmargin}{headheight}{headsep}{footskip}
+%\changepage{+3cm}{}{}{}{}{}{}{}{-5cm}
+\LoadLetterOption{DIN}
+\LoadLetterOption{sender}
+
+% LOAD ICONS
+% symbols (look oldish)
+\RequirePackage{marvosym}
+% use \Telefon, \Letter, \Mobilefone
+% better icons: font awesome
+% e.g. \faMobile, \faMobile*, \faPhone, \faPhone*, \faEnvelope, \faEnvelope[regular]
+\usepackage{fontawesome5}
+% \usepackage{lipsum} % for testing
+% for logos
+%\usepackage{graphicx}
+
+% layout
+%\renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont} % change font size % TODO: better method?
+% \renewcommand{\small}{\fontsize{10pt}{12pt}\selectfont}
+% \renewcommand{\footnotesize}{\fontsize{8pt}{9.6pt}\selectfont}
+\usepackage{setspace}
+\setstretch{1.0}
+\usepackage[
+inner=2cm, % 2,5 cm - 3,0 cm (left)
+outer=1.5cm, % 1,5 cm - 2,0 cm (right)
+top=2.0cm, % 2,0 cm - 2,5 cm
+bottom=1cm,
+includefoot,
+heightrounded
+]{geometry}
+
+% Farben und PDF-Eigenschaften
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{url}
+\usepackage[
+unicode=true,
+colorlinks=true,
+linktoc=all,
+breaklinks=true,
+pdfusetitle,
+]{hyperref}
+
+\makeatletter
+\hypersetup{
+	pdfsubject={Widerspruch IFG},
+}
+\makeatother
+
+\newcommand\myshade{85}
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1}
+\definecolor{cyanDark}{HTML}{155b44}
+\colorlet{mylinkcolor}{auburn}
+\colorlet{mycitecolor}{YellowOrange}
+\colorlet{myurlcolor}{Aquamarine}
+\colorlet{myfilecolor}{cyanDark}
+\colorlet{tablealternate}{yellow!12}
+
+\hypersetup{
+	linkcolor  = mylinkcolor!\myshade!black,
+	citecolor  = mycitecolor!\myshade!black,
+	urlcolor   = myfilecolor!100!black,
+	filecolor  = myfilecolor!\myshade!black,
+	colorlinks = true,
+}
+
+% font
+\usepackage[sfdefault]{roboto}
+% Set Font: sans serif Latin Modern
+%\usepackage{lmodern}
+% \renewcommand*\familydefault{\sfdefault}
+
+% Switch implementation
+\usepackage{xifthen}
+\newcommand{\ifequals}[2]{\ifthenelse{\equal{#1}{#2}}}
+\newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
+\newenvironment{switch}[1]{\renewcommand{\case}{\ifequals{#1}}}{}
+
+% Set Font: sans serif Latin Modern
+%\usepackage{lmodern}
+% \renewcommand*\familydefault{\sfdefault}
+
+% mail merge  Serienbrief
+\usepackage{ifthen,mailmerge}
+% \ifequal{A}{B}{what if A=B}{what if A<>B}
+\newcommand{\ifequal}[2]{\ifthenelse{\equal{#1}{#2}}}
+% if not empty
+\newcommand{\ifNonEmpty}[3]{\ifequal{#1}{}{#3}{#2}}
+\newcommand{\ifField}[1]{\ifNonEmpty{\field{#1}}}
+\newcommand{\ifFieldEqual}[1]{\ifequal{\field{#1}}}
+% \newcommand{\fieldOptional}[2]{\ifDefined{\field{#1}}{\field{#1}}}
+
+\usepackage[
+letterspace=150, % https://tex.stackexchange.com/a/62351/98645
+final
+]{microtype} % better hyphenation / breaks % TODO: https://tex.stackexchange.com/questions/82001/microtype-settings-for-dummies
+\microtypesetup{activate=true}
+
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{\baselineskip}
+
+\newcommand{\textsharpNew}{\#} %  https://tex.stackexchange.com/questions/44528/how-to-make-the-correct-hash-symbol-in-c-sharp-c
+
+\newenvironment{enumerateCompact}
+{ \begin{enumerate}
+		\setlength{\sep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}     }
+	{ \end{enumerate}                  } 
+\newenvironment{itemizeCompact}
+{ \begin{itemize}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}     }
+	{ \end{itemize}                  } 
+
+%
+% style fixes
+%
+
+% change itemize labels (switches first and second level symbols)
+\renewcommand{\labelitemi}{\normalfont\bfseries \textendash}
+\renewcommand{\labelitemii}{\textbullet}
+
+% fix footnotes, https://tex.stackexchange.com/a/40091/98645
+\newcommand\fnsep{\textsuperscript{,}}
+
+% don't split on pages https://tex.stackexchange.com/a/32210/98645
+\interfootnotelinepenalty=10000
+
+%%%%%% MAIL FIELDS
+\mailfields{
+	receiver,
+	name,
+	shortname,
+	address,
+	specialmail,
+	anrede,
+	anredeName,
+	closing,
+	appendixLabel,
+	appendix,
+	ps,
+}
+% NOTE: always add an empty field (i.e. comma ,) at the end!
+
+\begin{document}
+	% \def\today{1st January, 1895}
+	
+	% Set Appendix text at very end (double point will be set automatically)
+	\setkomavar*{enclseparator}{Anhang}
+	
+	% FragDenStaat
+	\newcommand{\requestTitle}{Informationsanfrage zu Beispieldaten}
+	\newcommand{\requestNumber}{123456}
+	\newcommand{\requestMail}{entermailadresshere@fragdenstaat.de}
+	\newcommand{\requestUploadToken}{copytokenforuploadhere}
+	\newcommand{\requestDate}{01.~Januar~2021}
+	\newcommand{\requestNoticeDate}{01.~Februar~2021}
+	\newcommand{\requestNoticeRef}{123456""{\textsharpNew}EXAMPLE""{\textsharpNew}0042}
+	\newcommand{\mediationRef}{25-729/002~II{\textsharpNew}XXXX}
+	
+	\setkomavar{yourref}{\requestNoticeRef}
+	\setkomavar{yourmail}{\requestNoticeDate}
+	\renewcommand{\myrefname}{Mein Zeichen}
+	\setkomavar{myref}{{\textsharpNew}\requestNumber}
+	
+	\mailrepeat{
+		\begin{letter}{%
+				\field{address}
+			}
+			
+			% custom sender per receiver
+			\LoadLetterOption{sender/me-\field{receiver}}
+			\ifField{specialmail}{
+				\setkomavar{specialmail}{\field{specialmail}}
+			}
+			
+			% set PDF metadata
+			\hypersetup{
+				pdftitle={Widerspruch gegen den Bescheid vom \requestNoticeDate},
+				pdfauthor={{\ownname}},
+				pdfsubject={Auskunft nach dem IFG \textendash{} \requestTitle},
+			}
+			
+			% subject, date, place:
+			\setkomavar{subject}{%
+				Betreff: Auskunft nach dem IFG \textendash{} \requestTitle\\
+				Hier: Widerspruch gegen den Bescheid vom \requestNoticeDate
+			}
+			%\setkomavar{title}{Widerspruch IFG-Bescheid}
+			
+			\opening{
+				\ifField{anrede}{\field{anrede}}{Sehr geehrte Damen und Herren}%
+				\ifNonEmpty{anrede}{}{\ifField{anredeName}{\field{anredeName}}{\field{name}}}%
+				,
+			}
+			
+			% HowTo Fields
+			% name: \ifField{name}{NichtLeer \field{name}}{Leer}\\
+			% blaField: \ifField{blaField}{NichtLeer}{Leer}\\
+			% leer: \ifNonEmpty{}{NIchtLeer}{Leer}\\
+			% nicht leer: \ifNonEmpty{n}{NIchtLeer}{Leer}\\
+			
+			% Test
+			% \ifthenelse{\equal{1}{1}}{True}{False}
+			% \ifthenelse{\equal{du}{du}}{True}{False}
+			% \ifthenelse{\equal{\field{anredeForm}}{}}{True}{False}
+			
+			%
+			% Einleitung
+			%
+			
+			gegen Ihren Bescheid vom
+			\requestNoticeDate{}
+			(Gz. \requestNoticeRef;
+			Dok-Nr. \requestNoticeRef{\textsharpNew}0004)
+			lege ich hiermit\\
+			\begin{center}
+				\vspace{-20pt}
+				\huge
+				\robotoMedium{\textls{WIDERSPRUCH}}
+				\vspace{-10pt}
+			\end{center}
+			ein.
+			
+			%
+			% Sachverhalt
+			%
+			
+			\subsubsection*{Sachverhalt} \vspace{-10pt}
+			
+			% Einleitung
+			Mittels E-Mail vom \requestDate{} beantragte ich auf Grundlage des Informationsfreiheitsgesetzes (IFG), des Umweltinformationsgesetzes (UIG) und des Gesetzes zur Verbesserung der gesundheitsbezogenenen Verbraucherinformation (VIG) die Zusendung des
+			%
+			\enquote{Verzeichnis von Verarbeitungstätigkeiten gemäß Artikel 30~DSGVO sowie §\,70~BDSG}.
+			%
+			Der genaue, vollständige Wortlaut soll hierbei nicht erneut wiederholt werden, da er beiden Parteien zugänglich ist.
+			
+			% Ablehnung Behörde
+			In Ihrem
+			elektronisch übermittelten
+			Bescheid vom
+			\requestNoticeDate{}
+			%			(Dok-Nr. \requestNoticeRef""{\textsharpNew}0004)
+			lehnen Sie als \field{name} (\field{shortname})
+			mein Informationersuchen auf Basis meines Antrags
+			%			nach erheblicher Verspätung
+			ab.
+			% Ablehnung Behörde Begründung
+			Sie lehnen die Anfrage nach §§\,5 und 6~IFG sowie nach §~3 Nr.~1 ab.
+			Als Grund für die zuerst genannte Rechtsgrundlage nennen Sie, dass Daten Ihrer Kunden betroffen seien.
+			Auch hierbei wird aus obig bereits genannten Gründen auf eine Wiederholung des genauen Wortlauts verzichtet.
+			
+			%
+			% Gegenargumentation
+			%
+			
+			\subsubsection*{Begründung} \vspace{-10pt}
+			% Zeitverzug
+			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers} (Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV. S. 117).
+			\enquote{Im Ergebnis ist § 9 Abs. 1 danach so auszulegen,
+				dass eine ablehnende Entscheidung \textelp{} zwingend
+				binnen eines Monats bekannt zu geben ist. Das
+				gilt für ablehnende oder teilweise ablehnende
+				Bescheide.}
+			Dies ist in dem hier vorliegenden Fall nicht geschehen. Aus diesem Grund erachte ich den Bescheid für unzulässig. Weitere Gründe sind dabei nicht ausgeschlossen.
+			
+			
+			% § 3 IFG Allg.
+			%Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}.
+			Generell gilt, dass
+			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] ist,
+			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}[ebd.].
+			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}[ebd.]
+			
+			% § 4
+			Eine Ablehnung nach §\,4 IFG scheidet deswegen aus, weil kein laufender Vorgang oder Entscheidungsverfahren existiert, welche den \enquote{Erfolg der Entscheidung oder bevorstehender behördlicher Maßnahmen vereitelt würde}, da es sich um ein feststehendes einmalig in der Vergangenheit Dokument handelt, welches meiner Einschätzung nach nur selten aktualisiert wird.
+			
+			% Verschlusssache
+			Sollten Teile der Informationen als Verschlussache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}[Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV., S.~65, Punkt~84]
+			
+			%
+			% Internal
+			%
+			
+			% Frist
+			% https://forum.okfn.de/t/muss-kann-man-einen-widerspruch-befristen/1091?u=rugk
+			Bzgl. der Fristen dieses Widerspruchs verweise ich auf die allgemein gültigen Rechtsbestimmungen, insbesondere
+			% Zustellung Verwaltungsrecht allgemein
+			§§\,41 Abs.\,1, 5 VwVfG, 3 Abs.\,1, 2 S.\,1 VwZG,
+			% Briefzustellung 
+			%§\,180 S.\,1 und 2 ZPO,
+			% Urlaubsfristen
+			§\,57 Abs.\,2 VwGO i.V.m. §\,222 Abs.\,2 ZPO,
+			% BGB Fristberechung allg. (Fristbeginn + Fristende)
+			§§\,187 Abs.\,1, 188 Abs.\,2 BGB,
+			§\,79 VwVfG,
+			% allgemein
+			%§\,57 Abs.\,2 VwGO,
+			§\,222 Abs.\,2 ZPO
+			sowie
+			% Zustellung elektronisch
+			§\,41\,VwVfG Abs.\,2 S.\,2, wonach \enquote{\textins*{e}in Verwaltungsakt, der im Inland oder in das Ausland elektronisch übermittelt wird, \textelp{} am dritten Tag nach der Absendung als bekannt gegeben \textins{gilt}}.
+			
+			%
+			% Schluss
+			%
+			
+			% Bitte Abwarten Vermittlung
+			Ich möchte Sie ferner bitten, mein gestartetes Vermittlungsverfahren nach §\,12~IFG beim Bundesbeauftragten für den Datenschutz und die Informationsfreiheit~(BfDI) zu diesem Fall%
+			, betroffenes Aktenzeichen
+			\mediationRef,
+			vor Bescheidung des Widerspruchs abzuwarten und die fachkundige rechtliche Beurteilung dieser unabhängigen dritten Stelle mit einfließen zu lassen.
+			
+			%\lipsum\lipsum  % for testing
+			
+			\closing{\ifField{closing}{\field{closing}}{Mit freundlichen Grü{\ss}en}}
+			
+			\ifField{appendixLabel}{
+				\setkomavar*{enclseparator}{\field{appendixLabel}}
+			}{
+				% workaround, because we cannot disable adding the appendix conditionally
+				% because we would have to include the appendix in an env (\ifField)
+				\setkomavar*{enclseparator}{}
+			}\
+			%    \ifField{appendix}{}{\setkomavar*{enclseparator}{}} % fails
+			\encl{\field{appendix}}
+			
+			\ifField{ps}{
+				\ps PS:~{\field{ps}}
+			}{}
+			
+			\par%
+			Anfragenr: \requestNumber \\
+			Antwort an: \usekomavar{fromemail} \\
+			Laden Sie gro{\ss}e Dateien zu dieser Anfrage hier hoch:\\
+			\url{https://fragdenstaat.de/anfrage/\requestNumber/upload/\requestUploadToken/}
+			
+			% FragDenStaat footer
+			%--- \\
+			\par\noindent\rule{0.2\textwidth}{0.4pt}\\
+			%\footnoterule
+			Hinweis: Ihre Antwort wird von mir ggf. auf der Plattform FragDenStaat.de veröffentlicht. Sämtliche personenbezogene Daten werde ich selbstverständlich unkenntlich machen.\\
+			Falls Sie Fragen dazu haben oder eine Idee, was für eine Anfrage bei Ihnen im Haus notwendig wäre, besuchen Sie:
+			\url{https://fragdenstaat.de/hilfe/fuer-behoerden/}
+	\end{letter}}
+	
+	\include{receiver/itzbund}
+	
+\end{document}

@@ -1,0 +1,23 @@
+\KOMAoptions{
+	fromurl=off,
+	fromemail=true,
+	backaddress=true,
+	fromfax=off,
+	fromphone=off,
+	frommobilephone=off,
+}
+\newcommand{\ownname}{Vorname Nachname}
+
+\setkomavar{fromname}{\ownname}
+% \setkomavar{fromphone}{}
+% \setkomavar{frommobilephone}[\faMobile*~]{\href{phone:+49123456789}{+49\,124\,456789}} % private mobile
+\setkomavar{fromemail}[{\faEnvelope[regular]}~]{\href{mailto:\requestMail}{\requestMail}}
+%\setkomavar{fromurl}[]{http://test.de}
+\setkomavar{backaddress}{\ownname, ExampleStreet 42, 12345 Stadt}
+\setkomavar{fromaddress}{ExampleStreet 42\\12345 Stadt}
+
+%\setkomavar{date}{\today}
+\setkomavar{place}{Stadt}
+%\setkomavar{location}{Stadt}
+
+\setkomavar{signature}{\ownname}

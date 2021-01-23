@@ -1,0 +1,30 @@
+% encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\ProvidesFile{sender.lco}[letter-class-option file]
+
+% Text of this document (sender.lco) is UTF-8 encoded
+\RequirePackage[utf8]{inputenc}
+
+% see Koma script for more detailed descriptions
+% comment or delate if not needed
+\KOMAoptions{
+    foldmarks=true,
+    fromalign=right,
+    footsepline=off,
+    firstfoot=on,
+    footsepline=false,
+%    footnoterule=false,
+}
+
+% optical stuff:
+\setkomafont{fromname}{\bfseries\color{black}\LARGE}
+\setkomafont{fromrule}{\color{green}}
+
+\renewcommand*{\raggedsignature}{\raggedright}
+
+% define vertical distance for signature
+\@setplength{sigbeforevskip}{1.8cm}
+\endinput
+
