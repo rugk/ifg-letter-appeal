@@ -16,7 +16,7 @@ enlargefirstpage=true,
 % fromalign=false,
 ]{scrletter}
 \parskip3mm
-\parindent0mm % if you want to have no lineskip
+\parindent0mm
 
 % encoding
 \usepackage[utf8]{inputenc}
@@ -154,16 +154,16 @@ final
 
 \newenvironment{enumerateCompact}
 { \begin{enumerate}
-		\setlength{\sep}{0pt}
-		\setlength{\parskip}{0pt}
-		\setlength{\parsep}{0pt}     }
-	{ \end{enumerate}                  } 
+	\setlength{\sep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}     }
+{ \end{enumerate}                  } 
 \newenvironment{itemizeCompact}
 { \begin{itemize}
-		\setlength{\itemsep}{0pt}
-		\setlength{\parskip}{0pt}
-		\setlength{\parsep}{0pt}     }
-	{ \end{itemize}                  } 
+	\setlength{\itemsep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}     }
+{ \end{itemize}                  } 
 
 %
 % style fixes
