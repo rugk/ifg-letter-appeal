@@ -2,10 +2,6 @@
 sender/*
 !sender/*.example
 
-# minted
-
-_minted-automatisierung/
-
 # build pdf (do not ignore PDFs in subdirectories)
 *.pdf
 !*/*.pdf
