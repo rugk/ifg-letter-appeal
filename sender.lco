@@ -10,12 +10,12 @@
 % see Koma script for more detailed descriptions
 % comment or delate if not needed
 \KOMAoptions{
-    foldmarks=true,
-    fromalign=right,
-    footsepline=off,
-    firstfoot=on,
-    footsepline=false,
-%    footnoterule=false,
+	foldmarks=true,
+	fromalign=right,
+	footsepline=off,
+	firstfoot=on,
+	footsepline=false,
+%  footnoterule=false,
 }
 
 % optical stuff:
@@ -27,4 +27,3 @@
 % define vertical distance for signature
 \@setplength{sigbeforevskip}{1.8cm}
 \endinput
-
