@@ -36,7 +36,7 @@ The letter style is mostly made possible thanks to [`scrletter`](https://www.cta
 
 Also thanks to the awesome [Stackexchange Tex](https://tex.stackexchange.com/) community. (Used questions/answers are usually linked as comments.)
 
-## More helpful links
+## Other helpful links
 
 * [How to calculate the time limit for appeals?](https://forum.okfn.de/t/berechnung-interpretation-der-monatsfrist-fuer-einen-widerspruch/943?u=rugk) (German) Also explains the formal requirements.
 * [CTAN page for `scrletter`](https://www.ctan.org/pkg/scrletter) with links to the documentation of KOMA-Script of (`scrguide.pdf`) in German and English.
