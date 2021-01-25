@@ -45,6 +45,7 @@ jobs:
             *-blx.aux
             *-blx.bib
             *.run.xml
+          key: always-cache
 
       - name: Use example sender file
         run: mv "sender/me-agency.lco.example" "sender/me-agency.lco"
