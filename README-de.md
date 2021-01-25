@@ -41,3 +41,12 @@ Danke auch an die großartige [Stackexchange Tex](https://tex.stackexchange.com/
 * [Wie ist die Frist bei Widersprüchen zu berechnen?](https://forum.okfn.de/t/berechnung-interpretation-der-monatsfrist-fuer-einen-widerspruch/943?u=rugk) Erklärt auch die Formerfordernisse.  
 * [CTAN-Seite für `scrletter`] (https://www.ctan.org/pkg/scrletter) mit Links zur Dokumentation von KOMA-Script (`scrguide.pdf`) in Deutsch und Englisch.
 * [Andere Briefvorlagen in anderen Formaten](https://forum.okfn.de/t/briefvorlage-fuer-widersprueche/900?u=rugk) im OKFN/FragDenStaat-Forum.
+
+## Rechtshinweis
+
+Dies stellt keine Rechtsberatung dar. Die verwendeten Texte stellen nur Beispiele dar und sollten vor jeder Verwendung auf ihre Anwendung geprüft werden.
+
+DIE SOFTWARE WIRD OHNE MÄNGELGEWÄHR UND OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIEßLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNG DER MARKTGÄNGIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER NICHTVERLETZUNG VON RECHTEN DRITTER, ZUR VERFÜGUNG GESTELLT. DIE AUTOREN ODER URHEBERRECHTSINHABER SIND IN KEINEM FALL HAFTBAR FÜR ANSPRÜCHE, SCHÄDEN ODER ANDERE VERPFLICHTUNGEN, OB IN EINER VERTRAGS- ODER HAFTUNGSKLAGE, EINER UNERLAUBTEN HANDLUNG ODER ANDERWEITIG, DIE SICH AUS, AUS ODER IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER ANDEREN GESCHÄFTEN MIT DER SOFTWARE ERGEBEN.  
+
+<!-- Diese Vorlage ist lizenziert unter der Lizenz Creative Commons Attribution 4.0 International (CC-BY), siehe: https://creativecommons.org/licenses/by/4.0 -->
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/rugk/ifg-letter-appeal">ifg-letter-appeal</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/rugk">rugk</a> ist lizenziert unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution 4.0 International (CC-BY)<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a>.</p>

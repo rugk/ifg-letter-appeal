@@ -41,3 +41,12 @@ Also thanks to the awesome [Stackexchange Tex](https://tex.stackexchange.com/) c
 * [How to calculate the time limit for appeals?](https://forum.okfn.de/t/berechnung-interpretation-der-monatsfrist-fuer-einen-widerspruch/943?u=rugk) (German) Also explains the formal requirements.
 * [CTAN page for `scrletter`](https://www.ctan.org/pkg/scrletter) with links to the documentation of KOMA-Script of (`scrguide.pdf`) in German and English.
 * [Other letter templates in other formats](https://forum.okfn.de/t/briefvorlage-fuer-widersprueche/900?u=rugk) (German) in the OKFN/FragDenStaat forum.
+
+## Legal notice
+
+This does not constitute legal advice. The texts used are only examples and should be checked for their application before each use.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+<!-- This template is licensed under the Creative Commons Attribution 4.0 International (CC-BY) license, siehe: https://creativecommons.org/licenses/by/4.0 -->
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/rugk/ifg-letter-appeal">ifg-letter-appeal</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/rugk">rugk</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution 4.0 International (CC-BY)<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a>.</p> 
