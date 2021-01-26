@@ -37,7 +37,6 @@ jobs:
           path: |
             *.aux
             *.lof
-            *.log
             *.lot
             *.fls
             *.out
