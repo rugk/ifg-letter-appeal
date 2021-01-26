@@ -65,3 +65,12 @@ jobs:
           #args: # optional, default is -pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode
           # Install extra packages by apt-get
           #extra_system_packages: # optional
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          # Artifact name
+          name: PDF # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: "*.pdf"
+          # The desired behavior if no files are found using the provided path.
+          if-no-files-found: error # optional, default is warn
