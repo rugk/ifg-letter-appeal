@@ -33,7 +33,7 @@ ngerman,
 % better page numbers
 % https://tex.stackexchange.com/a/578140/98645
 \renewcommand*\pagemark{%
-	\usekomafont{pagenumber}{-~\thepage~von~\letterlastpage~-}%
+	\usekomafont{pagenumber}{\hypersetup{hidelinks}-~\thepage~von~\letterlastpage~-}%
 }
 \let\letterpagemark\pagemark
 % https://tex.stackexchange.com/q/578016/98645
