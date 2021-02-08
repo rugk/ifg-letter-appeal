@@ -13,7 +13,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  - build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -81,3 +81,44 @@ jobs:
           path: "*.pdf"
           # The desired behavior if no files are found using the provided path.
           if-no-files-found: error # optional, default is warn
+    
+  # 
+  - screenshots:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    steps:
+      # convert PDF to screenshot 
+      # https://askubuntu.com/a/50180/606016
+      - name: 
+        run: |
+          apt-get -y install pdftoppm
+          pdftoppm *.pdf ./screenshots/template-page -png
+        
+      - name: Add & Commit
+        # You may pin to the exact commit or the version.
+        # uses: EndBug/add-and-commit@b3c7c1e078a023d75fb0bd326e02962575ce0519
+        uses: EndBug/add-and-commit@v7.0.0
+        with:
+          # Arguments for the git add command
+          add: "./screenshots/" # optional, default is .
+          # The name of the user that will be displayed as the author of the commit
+          #author_name: # optional, default is ${{ github.actor }}
+          # The email of the user that will be displayed as the author of the commit
+          #author_email: # optional, default is ${{ github.actor }}@users.noreply.github.com
+          # Name of the branch to use, if different from the one that triggered the workflow
+          #branch: # optional
+          # The directory where your repository is located. You should use actions/checkout first to set it up
+          #cwd: # optional, default is .
+          # The message for the commit
+          message: "chore: update example screenshots" # optional
+          # The flag used on the pull strategy
+          #pull_strategy: # optional, default is --no-rebase
+          # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (more info in the README)
+          #push: # optional, default is true
+          # Arguments for the git rm command
+          #remove: # optional
+          # Whether to use the --signoff option on git commit
+          #signoff: # optional
+          # Arguments for the git tag command (the tag name always needs to be the first word not preceded by a hyphen)
+          #tag: # optional
