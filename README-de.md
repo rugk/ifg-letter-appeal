@@ -11,8 +11,8 @@ Derzeit nur in deutsch verfügbar.
 
 Der enthaltene Text ist hauptsächlich als Beispiel gedacht. Außerdem enthält er einige allgemeine Argumente/Boilerplate-Text, der wiederverwendet werden kann.
 
-![Vorschaubild der ersten Seite](./screenshots/template-page1.png)
-![Vorschaubild der zweiten Seite](./screenshots/template-page2.png)
+![Vorschaubild der ersten Seite](./screenshots/template-page-1.png)
+![Vorschaubild der zweiten Seite](./screenshots/template-page-2.png)
 
 Die [PDF dieser zusammengestellten Vorlage kann auch heruntergeladen werden](https://github.com/rugk/ifg-letter-appeal/releases/latest).
 
