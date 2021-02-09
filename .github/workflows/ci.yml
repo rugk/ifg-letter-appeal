@@ -107,8 +107,6 @@ jobs:
           sudo apt-get -y install poppler-utils
           mkdir -p "$SCREENSHOT_DIR"
           pdftoppm *.pdf "$SCREENSHOT_DIR/template-page" -png
-          echo "Using screenshot dir: $SCREENSHOT_DIR"
-          ls -la&&tree
         
       - name: Add & Commit
         # You may pin to the exact commit or the version.
