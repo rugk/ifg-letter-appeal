@@ -101,7 +101,7 @@ jobs:
       # https://askubuntu.com/a/50180/606016
       - name: Generate screenshots
         run: |
-          apt-get -y install pdftoppm
+          sudo apt-get -y install pdftoppm
           pdftoppm *.pdf ./screenshots/template-page -png
         
       - name: Add & Commit
