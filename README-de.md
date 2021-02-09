@@ -41,7 +41,7 @@ Danke auch an die großartige [Stackexchange Tex](https://tex.stackexchange.com/
 ## Weitere hilfreiche Links
 
 * [Wie ist die Frist bei Widersprüchen zu berechnen?](https://forum.okfn.de/t/berechnung-interpretation-der-monatsfrist-fuer-einen-widerspruch/943?u=rugk) Erklärt auch die Formerfordernisse.  
-* [CTAN-Seite für `scrletter`] (https://www.ctan.org/pkg/scrletter) mit Links zur Dokumentation von KOMA-Script (`scrguide.pdf`) in Deutsch und Englisch.
+* [CTAN-Seite für `scrletter`](https://www.ctan.org/pkg/scrletter) mit Links zur Dokumentation von KOMA-Script (`scrguide.pdf`) in Deutsch und Englisch.
 * [Andere Briefvorlagen in anderen Formaten](https://forum.okfn.de/t/briefvorlage-fuer-widersprueche/900?u=rugk) im OKFN/FragDenStaat-Forum.
 
 ## Rechtshinweis
