@@ -107,7 +107,7 @@ jobs:
       - name: Add & Commit
         # You may pin to the exact commit or the version.
         # uses: EndBug/add-and-commit@b3c7c1e078a023d75fb0bd326e02962575ce0519
-        uses: EndBug/add-and-commit@v7.0.0
+        uses: EndBug/add-and-commit@v7
         with:
           # Arguments for the git add command
           add: "./screenshots/" # optional, default is .
