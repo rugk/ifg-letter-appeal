@@ -106,7 +106,7 @@ jobs:
         run: |
           sudo apt-get -y install poppler-utils
           mkdir -p "$SCREENSHOT_DIR"
-          pdftoppm *.pdf "$SCREENSHOT_DIR/template-page-" -png
+          pdftoppm *.pdf "$SCREENSHOT_DIR/template-page" -png
           echo "Using screenshot dir: $SCREENSHOT_DIR"
           ls -la&&tree
         
@@ -116,7 +116,7 @@ jobs:
         uses: EndBug/add-and-commit@v7
         with:
           # Arguments for the git add command
-          add: "$SCREENSHOT_DIR/" # optional, default is .
+          add: "$SCREENSHOT_DIR" # optional, default is .
           # The name of the user that will be displayed as the author of the commit
           author_name: github-actions # optional, default is ${{ github.actor }}
           # The email of the user that will be displayed as the author of the commit
