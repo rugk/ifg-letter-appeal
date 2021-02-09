@@ -4,7 +4,8 @@ name: stable-ci
 
 # Controls when the action will run. 
 on:
-  push: 'main'
+  push: 
+   branches: 'main'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
