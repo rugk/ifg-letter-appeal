@@ -101,7 +101,7 @@ jobs:
       # https://askubuntu.com/a/50180/606016
       - name: Generate screenshots
         run: |
-          sudo apt-get -y install pdftoppm
+          sudo apt-get -y install poppler-utils
           pdftoppm *.pdf ./screenshots/template-page -png
         
       - name: Add & Commit
