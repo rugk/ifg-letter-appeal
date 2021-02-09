@@ -2,6 +2,8 @@
 
 # ifg-letter-appeal
 
+![stable-ci](https://github.com/rugk/ifg-letter-appeal/workflows/stable-ci/badge.svg)
+
 A [LaTeX](https://www.latex-project.org/) template for appeals to official notifications of agencies to (German) “Freedom of information” (FOI) requests, in German the [Informationsfreiheitsgesetz](https://de.wikipedia.org/wiki/Informationsfreiheitsgesetz) (IFG).
 Created for and suggested to be used with [FragDenStaat](https://fragdenstaat.de/).
 
@@ -11,8 +13,8 @@ Currently only available in German.
 
 The included text is mostly intended as an example. Also, it includes some common arguments/boilerplate text you may re-use.
 
-![preview image of the first page](./screenshots/template-page1.png)
-![preview image of the second page](./screenshots/template-page2.png)
+![preview image of the first page](./screenshots/template-page-1.png)
+![preview image of the second page](./screenshots/template-page-2.png)
 
 The [PDF of this compiled template can also be downloaded](https://github.com/rugk/ifg-letter-appeal/releases/latest).
 

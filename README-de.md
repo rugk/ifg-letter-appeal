@@ -2,6 +2,8 @@
 
 # ifg-letter-appeal
 
+![stable-ci](https://github.com/rugk/ifg-letter-appeal/workflows/stable-ci/badge.svg)
+
 Eine [LaTeX](https://www.latex-project.org/)-Vorlage für Einsprüche gegen ablehnende Bescheide von Behörden auf IFG-Anfragen (siehe [Informationsfreiheitsgesetz](https://de.wikipedia.org/wiki/Informationsfreiheitsgesetz)).
 Erstellt für und vorgeschlagen zur Verwendung mit [FragDenStaat](https://fragdenstaat.de/).
 
@@ -11,8 +13,8 @@ Derzeit nur in deutsch verfügbar.
 
 Der enthaltene Text ist hauptsächlich als Beispiel gedacht. Außerdem enthält er einige allgemeine Argumente/Boilerplate-Text, der wiederverwendet werden kann.
 
-![Vorschaubild der ersten Seite](./screenshots/template-page1.png)
-![Vorschaubild der zweiten Seite](./screenshots/template-page2.png)
+![Vorschaubild der ersten Seite](./screenshots/template-page-1.png)
+![Vorschaubild der zweiten Seite](./screenshots/template-page-2.png)
 
 Die [PDF dieser zusammengestellten Vorlage kann auch heruntergeladen werden](https://github.com/rugk/ifg-letter-appeal/releases/latest).
 
@@ -39,7 +41,7 @@ Danke auch an die großartige [Stackexchange Tex](https://tex.stackexchange.com/
 ## Weitere hilfreiche Links
 
 * [Wie ist die Frist bei Widersprüchen zu berechnen?](https://forum.okfn.de/t/berechnung-interpretation-der-monatsfrist-fuer-einen-widerspruch/943?u=rugk) Erklärt auch die Formerfordernisse.  
-* [CTAN-Seite für `scrletter`] (https://www.ctan.org/pkg/scrletter) mit Links zur Dokumentation von KOMA-Script (`scrguide.pdf`) in Deutsch und Englisch.
+* [CTAN-Seite für `scrletter`](https://www.ctan.org/pkg/scrletter) mit Links zur Dokumentation von KOMA-Script (`scrguide.pdf`) in Deutsch und Englisch.
 * [Andere Briefvorlagen in anderen Formaten](https://forum.okfn.de/t/briefvorlage-fuer-widersprueche/900?u=rugk) im OKFN/FragDenStaat-Forum.
 
 ## Rechtshinweis
