@@ -87,6 +87,9 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     needs: [build]
+      
+    env:
+      SCREENSHOT_DIR: "./screenshots"
     
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -102,13 +105,8 @@ jobs:
       - name: Generate screenshots
         run: |
           sudo apt-get -y install poppler-utils
-          pdftoppm *.pdf "./screenshots/template-page-" -png
-          
-      - name: TEst 1
-        run: pdftoppm *.pdf "./screenshots/template-page-" -png
-          
-      - name: TEst 2 show dir
-        run: ls -la&&tree
+          mkdir -p "$SCREENSHOT_DIR"
+          pdftoppm *.pdf "$SCREENSHOT_DIR/template-page-" -png
         
       - name: Add & Commit
         # You may pin to the exact commit or the version.
@@ -116,7 +114,7 @@ jobs:
         uses: EndBug/add-and-commit@v7
         with:
           # Arguments for the git add command
-          add: "./screenshots/" # optional, default is .
+          add: "$SCREENSHOT_DIR/" # optional, default is .
           # The name of the user that will be displayed as the author of the commit
           author_name: github-actions # optional, default is ${{ github.actor }}
           # The email of the user that will be displayed as the author of the commit
