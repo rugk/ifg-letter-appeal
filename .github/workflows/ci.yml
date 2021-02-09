@@ -102,7 +102,7 @@ jobs:
       - name: Generate screenshots
         run: |
           sudo apt-get -y install poppler-utils
-          pdftoppm *.pdf ./screenshots/template-page- -png
+          pdftoppm *.pdf "./screenshots/template-page-" -png
         
       - name: Add & Commit
         # You may pin to the exact commit or the version.
