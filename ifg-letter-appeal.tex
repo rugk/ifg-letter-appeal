@@ -115,6 +115,18 @@ pdfusetitle,
 	colorlinks = true,
 }
 
+% Referenzen
+%\usepackage{biblatex-german-legal}
+\usepackage[style=biblatex-juradiss,
+sortcites=true,
+sorting=none,
+defernumbers=true,
+%maxcitenames=3,
+minbibnames=3, % cite up to three authors in bib
+backref=true,
+backend=biber]{biblatex}
+\addbibresource{references/ifg.bib}
+
 % font
 \usepackage[sfdefault]{roboto}
 % Set Font: sans serif Latin Modern
@@ -309,7 +321,7 @@ final
 
 			\subsubsection*{Begründung} \vspace{-10pt}
 			% Zeitverzug
-			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers} (Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV. S. 117).
+			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers}\cite[117]{djvIfgKommentierung}.
 			\enquote{Im Ergebnis ist § 9 Abs. 1 danach so auszulegen,
 				dass eine ablehnende Entscheidung \textelp{} zwingend
 				binnen eines Monats bekannt zu geben ist. Das
@@ -319,17 +331,17 @@ final
 
 
 			% § 3 IFG Allg.
-			%Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}.
+			% Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme}\cite{djvIfgKommentierung} darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}\cite{djvIfgKommentierung}.
 			Generell gilt, dass
-			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] ist,
-			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}[ebd.].
-			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}[ebd.]
+			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen}\cite{djvIfgKommentierung} ist,
+			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}\cite{djvIfgKommentierung}.
+			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}\cite{djvIfgKommentierung}.
 
 			% § 4
 			Eine Ablehnung nach §\,4 IFG scheidet deswegen aus, weil kein laufender Vorgang oder Entscheidungsverfahren existiert, welche den \enquote{Erfolg der Entscheidung oder bevorstehender behördlicher Maßnahmen vereitelt würde}, da es sich um ein feststehendes einmalig in der Vergangenheit Dokument handelt, welches meiner Einschätzung nach nur selten aktualisiert wird.
 
 			% Verschlusssache
-			Sollten Teile der Informationen als Verschlussache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}[Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV., S.~65, Punkt~84]
+			Sollten Teile der Informationen als Verschlusssache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}\cite[84][65]{djvIfgKommentierung}
 
 			%
 			% Internal
@@ -387,6 +399,8 @@ final
 			Antwort an: \usekomavar{fromemail} \\
 			Laden Sie gro{\ss}e Dateien zu dieser Anfrage hier hoch:\\
 			\url{https://fragdenstaat.de/anfrage/\requestNumber/upload/\requestUploadToken/}
+			
+			\printbibliography[nottype=jurisdiction ,nottype=legal]
 
 			% FragDenStaat footer
 			%--- \\
