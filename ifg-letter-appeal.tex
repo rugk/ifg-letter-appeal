@@ -124,8 +124,95 @@ defernumbers=true,
 %maxcitenames=3,
 minbibnames=3, % cite up to three authors in bib
 backref=true,
+giveninits=true,
+loccittracker=true,
 backend=biber]{biblatex}
 \addbibresource{references/ifg.bib}
+
+\DeclareLabeldate{%
+	\field{date}
+	\field{year}
+	\field{eventdate}
+	\field{origdate}
+	\field{urldate}
+	\literal{nodate}
+}
+
+\ExecuteBibliographyOptions{labeldateparts}
+
+%wrapper for the ibid citing
+\DeclareCiteCommand{\legalcite}[\mkbibbrackets]
+{\usebibmacro{prenote}}
+{%
+	\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}%
+	{\ifloccit{%
+			\global\booltrue{cbx:loccit}%
+			\usebibmacro{cite:loccit}%
+		}{\usebibmacro{cite:ibid}}}%
+	{\usebibmacro{cite:legal}\usebibmacro{cite:save}}%
+}{\multicitedelim}
+{\usebibmacro{cite:postnote}}
+
+
+%cite format
+\newbibmacro*{cite:legal}{%
+	\usebibmacro{citeindex}%
+	\iffieldundef{shorthand}%
+	{%
+		\ifnameundef{labelname} {} {%
+			\printnames[family-given]{labelname}%
+			\setunit{\printdelim{nameyeardelim}}%
+		}
+		\iffieldundef{labelyear} {} {
+			\usebibmacro{cite:labeldate+extradate}%
+			\setunit{\addperiod\addspace}\printdelim{yeartitledelim}}
+		\usebibmacro{cite:label}
+		\setunit{\addperiod\addspace}
+		\usebibmacro{cite:location+publisher}%
+	}%
+	{\usebibmacro{cite:shorthand}}%
+}
+
+%helper macros, this one is the definition of authoryear.cbx
+\newbibmacro*{cite:label}{%
+	\iffieldundef{label}
+	{\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+	{\printtext[bibhyperref]{\printfield{label}}}}
+
+
+\newbibmacro*{cite:labeldate+extradate}{%
+	\iffieldundef{labelyear}
+	{}
+	{\printtext[parens]{\printlabeldateextra}}}
+
+\newbibmacro*{cite:location+publisher}{%
+	\iflistundef{location}{}{
+		\printlist{location}%
+		\iflistundef{publisher}
+		{\setunit*{\addcomma\space}}
+		{\setunit*{\addcolon\space}}%
+	}%
+	\printlist{publisher}%
+	\setunit{\addperiod}%
+	\newunit
+}
+
+%add loccite support, adopted from biblatex authortitle-ibid.cbx
+\newbibmacro*{cite:postnote}{%
+	\ifbool{cbx:loccit}%
+	{}%
+	{\usebibmacro{postnote}}%
+}
+
+\newbibmacro*{cite:loccit}{%
+	\printtext[bibhyperref]{\bibstring[\mkibid]{loccit}}}
+
+\AtBeginDocument{%to be changed after language setup
+	\renewcommand*{\multinamedelim}{\addcomma\addspace}
+	\renewcommand*{\finalnamedelim}{\addspace\&\addspace}
+}
+
+
 
 % font
 \usepackage[sfdefault]{roboto}
@@ -321,7 +408,7 @@ final
 
 			\subsubsection*{Begründung} \vspace{-10pt}
 			% Zeitverzug
-			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers}\cite[117]{djvIfgKommentierung}.
+			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers}\legalcite[117]{djvIfgKommentierung}.
 			\enquote{Im Ergebnis ist § 9 Abs. 1 danach so auszulegen,
 				dass eine ablehnende Entscheidung \textelp{} zwingend
 				binnen eines Monats bekannt zu geben ist. Das
@@ -331,17 +418,17 @@ final
 
 
 			% § 3 IFG Allg.
-			% Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme}\cite{djvIfgKommentierung} darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}\cite{djvIfgKommentierung}.
+			% Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme}\legalcite{djvIfgKommentierung} darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}\legalcite{djvIfgKommentierung}.
 			Generell gilt, dass
-			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen}\cite{djvIfgKommentierung} ist,
-			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}\cite{djvIfgKommentierung}.
-			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}\cite{djvIfgKommentierung}.
+			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen}\legalcite{djvIfgKommentierung} ist,
+			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}\legalcite{djvIfgKommentierung}.
+			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}\legalcite{djvIfgKommentierung}.
 
 			% § 4
 			Eine Ablehnung nach §\,4 IFG scheidet deswegen aus, weil kein laufender Vorgang oder Entscheidungsverfahren existiert, welche den \enquote{Erfolg der Entscheidung oder bevorstehender behördlicher Maßnahmen vereitelt würde}, da es sich um ein feststehendes einmalig in der Vergangenheit Dokument handelt, welches meiner Einschätzung nach nur selten aktualisiert wird.
 
 			% Verschlusssache
-			Sollten Teile der Informationen als Verschlusssache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}\cite[84][65]{djvIfgKommentierung}
+			Sollten Teile der Informationen als Verschlusssache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}\legalcite[84][65]{djvIfgKommentierung}
 
 			%
 			% Internal
@@ -399,8 +486,6 @@ final
 			Antwort an: \usekomavar{fromemail} \\
 			Laden Sie gro{\ss}e Dateien zu dieser Anfrage hier hoch:\\
 			\url{https://fragdenstaat.de/anfrage/\requestNumber/upload/\requestUploadToken/}
-			
-			\printbibliography[nottype=jurisdiction ,nottype=legal]
 
 			% FragDenStaat footer
 			%--- \\
