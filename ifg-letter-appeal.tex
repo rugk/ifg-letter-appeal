@@ -18,14 +18,16 @@ enlargefirstpage=true,
 \parskip3mm
 \parindent0mm
 
-% encoding
-\usepackage[utf8]{inputenc}
+% encoding only necessary if neither luatex or xetex
+\usepackage{iftex}
+\ifPDFTeX
 \usepackage[T1]{fontenc}
+\fi
 
 % deutsch
 \usepackage[
 english,
-ngerman,
+main=ngerman,
 % shorthands=off
 ]{babel}
 \usepackage[ngerman]{isodate}\usepackage[autostyle, german=quotes]{csquotes} % deutsche Anführungszeichen mit \enquote
@@ -70,8 +72,6 @@ ngerman,
 %\renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont} % change font size % TODO: better method?
 % \renewcommand{\small}{\fontsize{10pt}{12pt}\selectfont}
 % \renewcommand{\footnotesize}{\fontsize{8pt}{9.6pt}\selectfont}
-\usepackage{setspace}
-\setstretch{1.0}
 \usepackage[
 inner=2cm, % 2,5 cm - 3,0 cm (left)
 outer=1.5cm, % 1,5 cm - 2,0 cm (right)
@@ -85,10 +85,8 @@ heightrounded
 \usepackage[dvipsnames, table]{xcolor}
 \usepackage{url}
 \usepackage[
-unicode=true,
 colorlinks=true,
-linktoc=all,
-breaklinks=true,
+% linktoc=all,
 pdfusetitle,
 ]{hyperref}
 
@@ -109,11 +107,129 @@ pdfusetitle,
 
 \hypersetup{
 	linkcolor  = mylinkcolor!\myshade!black,
-	citecolor  = mycitecolor!\myshade!black,
+	citecolor  = ., % mycitecolor!\myshade!black,
 	urlcolor   = myfilecolor!100!black,
 	filecolor  = myfilecolor!\myshade!black,
 	colorlinks = true,
 }
+
+% Referenzen
+%\usepackage{biblatex-german-legal}
+\usepackage[style=biblatex-juradiss,
+sortcites=true,
+sorting=none,
+defernumbers=true,
+%maxcitenames=3,
+minbibnames=3, % cite up to three authors in bib
+backref=true,
+giveninits=true,
+loccittracker=constrict,
+backend=biber]{biblatex}
+\addbibresource{references/ifg.bib}
+
+\DeclareLabeldate{%
+	\field{date}
+	\field{year}
+	\field{eventdate}
+	\field{origdate}
+	\field{urldate}
+	\literal{nodate}
+}
+
+\ExecuteBibliographyOptions{labeldateparts}
+
+% defines \lawcite for inline law citations https://tex.stackexchange.com/a/592383/98645
+%wrapper for the ibid citing
+\DeclareCiteCommand{\legalcite}[\mkbibbrackets]
+{\usebibmacro{prenote}}
+{%
+	\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}%
+	{%
+		\ifloccit{%
+			\global\booltrue{cbx:loccit}%
+			\usebibmacro{cite:ibid}%
+		}{%
+			\global\boolfalse{cbx:loccit}%
+			\usebibmacro{cite:loccit}}}%
+	{\usebibmacro{cite:legal}\usebibmacro{cite:save}}%
+}{\multicitedelim}
+{\usebibmacro{cite:postnote}}
+
+
+%cite format
+\newbibmacro*{cite:legal}{%
+	\usebibmacro{citeindex}%
+	\iffieldundef{shorthand}%
+	{%
+		\ifnameundef{labelname} {} {%
+			\printnames[family-given]{labelname}%
+			\setunit{\printdelim{nameyeardelim}}%
+		}
+		\iffieldundef{labelyear} {} {
+			\usebibmacro{cite:labeldate+extradate}%
+			\setunit{\addperiod\addspace}\printdelim{yeartitledelim}}
+		\usebibmacro{cite:label}
+		\setunit{\addperiod\addspace}
+		\usebibmacro{cite:location+publisher}%
+	}%
+	{\usebibmacro{cite:shorthand}}%
+}
+
+%helper macros, this one is the definition of authoryear.cbx
+\newbibmacro*{cite:label}{%
+	\iffieldundef{label}
+	{\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}
+	{\printtext[bibhyperref]{\printfield{label}}}}
+
+
+\newbibmacro*{cite:labeldate+extradate}{%
+	\iffieldundef{labelyear}
+	{}
+	{\printtext[parens]{\printlabeldateextra}}}
+
+\newbibmacro*{cite:location+publisher}{%
+	\iflistundef{location}{}{
+		\printlist{location}%
+		\iflistundef{publisher}
+		{\setunit*{\addcomma\space}}
+		{\setunit*{\addcolon\space}}%
+	}%
+	\printlist{publisher}%
+	\setunit{\addperiod}%
+	\newunit
+}
+
+%add loccite support, adopted from biblatex authortitle-ibid.cbx
+%\newbibmacro*{cite:postnote}{%
+%	\ifbool{cbx:loccit}%
+%	{}%
+%	{\usebibmacro{postnote}}%
+%}
+
+\newbibmacro*{cite:loccit}{%
+	\printtext[bibhyperref]{\bibstring[\mkibid]{loccit}}}
+
+\AtBeginDocument{%to be changed after language setup
+	\renewcommand*{\multinamedelim}{\addcomma\addspace}
+	\renewcommand*{\finalnamedelim}{\addspace\&\addspace}
+}
+
+%In case you also want to get ibid, with empty postnote but that's overriding the test
+\makeatletter
+\def\blx@loccit@numcheck#1{%
+   \blx@imc@iffieldundef{postnote}%
+   {%
+       \ifcsundef{blx@lastnote@#1@\abx@field@entrykey}%
+           {\@firstoftwo}%
+           {\@secondoftwo}%
+   }%
+   {%
+       \expandafter\blx@imc@ifpages%
+       \expandafter{\abx@field@postnote}%
+       {\blx@imc@iffieldequalcs{postnote}{blx@lastnote@#1@\abx@field@entrykey}}%
+       {\@secondoftwo}}}%
+\ExplSyntaxOff
+\makeatother
 
 % font
 \usepackage[sfdefault]{roboto}
@@ -309,7 +425,7 @@ final
 
 			\subsubsection*{Begründung} \vspace{-10pt}
 			% Zeitverzug
-			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers} (Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV. S. 117).
+			Nach~§\,9 Abs.\,1~IFG ist die Bekanntgabe der Entscheidung bei Ablehnung oder teilweiser Ablehnung zwingend innerhalb eines Monats nach Antragstellung zu erfolgen. Dies \enquote{entspricht auch dem Zweck des Gesetzes, möglichst bald Klarheit über den Informationszugang oder dessen Verweigerung zu schaffen. Schließlich entspricht diese Auslegung dem Willen des Gesetzgebers}\legalcite[117]{djvIfgKommentierung}.
 			\enquote{Im Ergebnis ist § 9 Abs. 1 danach so auszulegen,
 				dass eine ablehnende Entscheidung \textelp{} zwingend
 				binnen eines Monats bekannt zu geben ist. Das
@@ -319,17 +435,17 @@ final
 
 
 			% § 3 IFG Allg.
-			%Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}.
+			% Generell besteht ein Regel-Ausnahme-Verhältnis, \enquote{die Verweigerung des Zugangs die begründungspflichtige Ausnahme}\legalcite{djvIfgKommentierung} darstellt. Auch sind Ausnahmetatbestände der §§\,3 bis 6 \enquote{nach den üblichen Auslegungsregeln eng zu verstehen}\legalcite{djvIfgKommentierung}.
 			Generell gilt, dass
-			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen} [Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV.] ist,
-			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}[ebd.].
-			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}[ebd.]
+			\enquote{in der Begründung einer ablehnenden Entscheidung \textelp{} die nachteiligen Auswirkungen konkret zu benennen und \textendash darzulegen}\legalcite{djvIfgKommentierung} ist,
+			\enquote{warum die Möglichkeit besteht, dass solche \textins{nachteilige} Auswirkungen \textins{nach §\,3 IFG Nr.~1} eintreten}\legalcite{djvIfgKommentierung}.
+			Es ist erforderlich \enquote{dass die Möglichkeit, dass das jeweilige Schutzgut beeinträchtigt wird, besteht und von der ablehnenden Behörde auch dargelegt wird}\legalcite{djvIfgKommentierung}.
 
 			% § 4
 			Eine Ablehnung nach §\,4 IFG scheidet deswegen aus, weil kein laufender Vorgang oder Entscheidungsverfahren existiert, welche den \enquote{Erfolg der Entscheidung oder bevorstehender behördlicher Maßnahmen vereitelt würde}, da es sich um ein feststehendes einmalig in der Vergangenheit Dokument handelt, welches meiner Einschätzung nach nur selten aktualisiert wird.
 
 			% Verschlusssache
-			Sollten Teile der Informationen als Verschlussache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}[Mecklenburg, W. \& Pöppelmann, B. (2007). Informationsfreiheitsgesetz. Bonn: DJV., S.~65, Punkt~84]
+			Sollten Teile der Informationen als Verschlusssache eingestuft sein, so kann sich eine \enquote{Ablehnung eines Informationsantrages, die auf §\,3 Nr.\,4 gestützt werden soll, \textelp{} nicht auf den formellen Hinweis, es liege beispielsweise eine Verschlusssache vor, beschränken.}\legalcite[84][65]{djvIfgKommentierung}
 
 			%
 			% Internal
