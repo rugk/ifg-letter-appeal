@@ -225,7 +225,7 @@ backend=biber]{biblatex}
            {\@firstoftwo}%
            {\@secondoftwo}%
    }%
-   {\expandafter\show\csname blx@lastnote@#1@\abx@field@entrykey\endcsname%
+   {%
        \expandafter\blx@imc@ifpages%
        \expandafter{\abx@field@postnote}%
        {\blx@imc@iffieldequalcs{postnote}{blx@lastnote@#1@\abx@field@entrykey}}%
