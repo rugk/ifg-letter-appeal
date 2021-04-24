@@ -18,14 +18,16 @@ enlargefirstpage=true,
 \parskip3mm
 \parindent0mm
 
-% encoding
-\usepackage[utf8]{inputenc}
+% encoding only necessary if neither luatex or xetex
+\usepackage{iftex}
+\ifPDFTeX
 \usepackage[T1]{fontenc}
+\fi
 
 % deutsch
 \usepackage[
 english,
-ngerman,
+main=ngerman,
 % shorthands=off
 ]{babel}
 \usepackage[ngerman]{isodate}\usepackage[autostyle, german=quotes]{csquotes} % deutsche Anführungszeichen mit \enquote
@@ -70,8 +72,6 @@ ngerman,
 %\renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont} % change font size % TODO: better method?
 % \renewcommand{\small}{\fontsize{10pt}{12pt}\selectfont}
 % \renewcommand{\footnotesize}{\fontsize{8pt}{9.6pt}\selectfont}
-\usepackage{setspace}
-\setstretch{1.0}
 \usepackage[
 inner=2cm, % 2,5 cm - 3,0 cm (left)
 outer=1.5cm, % 1,5 cm - 2,0 cm (right)
@@ -85,10 +85,8 @@ heightrounded
 \usepackage[dvipsnames, table]{xcolor}
 \usepackage{url}
 \usepackage[
-unicode=true,
 colorlinks=true,
 % linktoc=all,
-breaklinks=true,
 pdfusetitle,
 ]{hyperref}
 
@@ -146,7 +144,7 @@ backend=biber]{biblatex}
 {\usebibmacro{prenote}}
 {%
 	\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}%
-	{
+	{%
 		\ifloccit{%
 			\global\booltrue{cbx:loccit}%
 			\usebibmacro{cite:ibid}%
@@ -225,7 +223,7 @@ backend=biber]{biblatex}
            {\@firstoftwo}%
            {\@secondoftwo}%
    }%
-   {\expandafter\show\csname blx@lastnote@#1@\abx@field@entrykey\endcsname%
+   {%
        \expandafter\blx@imc@ifpages%
        \expandafter{\abx@field@postnote}%
        {\blx@imc@iffieldequalcs{postnote}{blx@lastnote@#1@\abx@field@entrykey}}%
