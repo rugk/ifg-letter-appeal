@@ -18,9 +18,11 @@ enlargefirstpage=true,
 \parskip3mm
 \parindent0mm
 
-% encoding
-\usepackage[utf8]{inputenc}
+% encoding only necessary if neither luatex or xetex
+\usepackage{iftex}
+\ifPDFTeX
 \usepackage[T1]{fontenc}
+\fi
 
 % deutsch
 \usepackage[
