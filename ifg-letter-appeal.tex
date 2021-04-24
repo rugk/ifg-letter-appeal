@@ -146,7 +146,7 @@ backend=biber]{biblatex}
 {\usebibmacro{prenote}}
 {%
 	\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}%
-	{
+	{%
 		\ifloccit{%
 			\global\booltrue{cbx:loccit}%
 			\usebibmacro{cite:ibid}%
