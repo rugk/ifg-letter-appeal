@@ -202,11 +202,11 @@ backend=biber]{biblatex}
 }
 
 %add loccite support, adopted from biblatex authortitle-ibid.cbx
-\newbibmacro*{cite:postnote}{%
-	\ifbool{cbx:loccit}%
-	{}%
-	{\usebibmacro{postnote}}%
-}
+%\newbibmacro*{cite:postnote}{%
+%	\ifbool{cbx:loccit}%
+%	{}%
+%	{\usebibmacro{postnote}}%
+%}
 
 \newbibmacro*{cite:loccit}{%
 	\printtext[bibhyperref]{\bibstring[\mkibid]{loccit}}}
