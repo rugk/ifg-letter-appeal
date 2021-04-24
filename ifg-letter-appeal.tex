@@ -125,7 +125,7 @@ defernumbers=true,
 minbibnames=3, % cite up to three authors in bib
 backref=true,
 giveninits=true,
-loccittracker=true,
+loccittracker=constrict,
 backend=biber]{biblatex}
 \addbibresource{references/ifg.bib}
 
@@ -140,15 +140,19 @@ backend=biber]{biblatex}
 
 \ExecuteBibliographyOptions{labeldateparts}
 
+% defines \lawcite for inline law citations https://tex.stackexchange.com/a/592383/98645
 %wrapper for the ibid citing
 \DeclareCiteCommand{\legalcite}[\mkbibbrackets]
 {\usebibmacro{prenote}}
 {%
 	\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}%
-	{\ifloccit{%
+	{
+		\ifloccit{%
 			\global\booltrue{cbx:loccit}%
-			\usebibmacro{cite:loccit}%
-		}{\usebibmacro{cite:ibid}}}%
+			\usebibmacro{cite:ibid}%
+		}{%
+			\global\boolfalse{cbx:loccit}%
+			\usebibmacro{cite:loccit}}}%
 	{\usebibmacro{cite:legal}\usebibmacro{cite:save}}%
 }{\multicitedelim}
 {\usebibmacro{cite:postnote}}
@@ -212,7 +216,22 @@ backend=biber]{biblatex}
 	\renewcommand*{\finalnamedelim}{\addspace\&\addspace}
 }
 
-
+%In case you also want to get ibid, with empty postnote but that's overriding the test
+\makeatletter
+\def\blx@loccit@numcheck#1{%
+   \blx@imc@iffieldundef{postnote}%
+   {%
+       \ifcsundef{blx@lastnote@#1@\abx@field@entrykey}%
+           {\@firstoftwo}%
+           {\@secondoftwo}%
+   }%
+   {\expandafter\show\csname blx@lastnote@#1@\abx@field@entrykey\endcsname%
+       \expandafter\blx@imc@ifpages%
+       \expandafter{\abx@field@postnote}%
+       {\blx@imc@iffieldequalcs{postnote}{blx@lastnote@#1@\abx@field@entrykey}}%
+       {\@secondoftwo}}}%
+\ExplSyntaxOff
+\makeatother
 
 % font
 \usepackage[sfdefault]{roboto}
